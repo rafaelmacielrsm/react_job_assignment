@@ -1,3 +1,90 @@
-h1{
-  color: red;
+// Variables
+$primary-color-dark:   #388E3C;
+$primary-color:        #4CAF50;
+$primary-color-light:  #C8E6C9;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #7C4DFF;
+$accent-color-light:   #B388FF;
+$accent-color-dark:    #6200EA;
+$primary-text-color:   #212121;
+$secondary-text-color: #757575;
+$divider-color:        #BDBDBD;
+
+$break-sm: 576px;
+$break-md: 768px;
+$break-lg: 992px;
+$break-xl: 1200px;
+
+:export {
+  primary_color_dark: $primary-color-dark;
+  primary_color: $primary-color;
+  primary_color_light: $primary-color-light;
+  primary_color_text: $primary-color-text;
+  accent_color: $accent-color;
+  accent_color_light: $accent-color-light;
+  accent_color_dark: $accent-color-dark;
+  primary_text_color: $primary-text-color;
+  secondary_text_color: $secondary-text-color;
+  divider-color: $divider-color;
+}
+
+@import 'dashboard';
+
+.page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary-color-light;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50%;
+
+  @media screen and (max-width: $break-sm){
+    width: 80%;
+  }
+
+  @media screen and (min-width: $break-sm) and (max-width: $break-md){
+    width: 65%;
+  }
+
+  @media screen and (min-width: $break-md) and (max-width: $break-lg){
+    width: 50%;
+  }
+
+  @media screen and (min-width: $break-lg){
+    width: 35%;
+  }
+}
+
+#gender-checkbox{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+input:invalid + div>hr:nth-of-type(1){
+  border-color: rgb(244, 67, 54) !important;
+}
+
+#loading{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, .3);
+}
+
+.personal-info{
+  transition: 0.2s all;
 }
