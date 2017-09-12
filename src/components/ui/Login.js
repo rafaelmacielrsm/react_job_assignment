@@ -79,32 +79,31 @@ export class Login extends Component {
       person: { name, age, gender, lonlat },
       items: Object.keys(items).map(k => `${k}:${items[k]}`).join(', ')
     }
-
-    this.props.handleUser("a116b327-6d49-4460-b0c0-0817e2da528a");
-  //   var promiseObj = createPerson(parameterize(json));
-  //   promiseObj
-  //     .then(response => {
-  //       if (response.status == 201) {
-  //         () => props.handleUser(response.data.id);
-  //       }
-  //     })
-  //     .catch(error => {
-  //       if (error.response) {
-  //         this.setState({
-  //           sendingRequest: false,
-  //           alertMessage: "Your info couldn't be salved, please \
-  //           check for errors in the form",
-  //           step: 1,
-  //           ...this.organizeErrorResponse(error.response.data)
-  //         })
-  //       }else if (error.request) {
-  //         this.setState({
-  //           sendingRequest: false,
-  //           alertMessage: 'We are sorry, it seems like there was a network \
-  //           error, try again in a few minutes'})
-  //       }
-  //     }
-  //   )
+        
+    var promiseObj = createPerson(parameterize(json));
+    promiseObj
+      .then(response => {
+        if (response.status == 201) {
+          () => props.handleUser(response.data.id);
+        }
+      })
+      .catch(error => {
+        if (error.response) {
+          this.setState({
+            sendingRequest: false,
+            alertMessage: "Your info couldn't be salved, please \
+            check for errors in the form",
+            step: 1,
+            ...this.organizeErrorResponse(error.response.data)
+          })
+        }else if (error.request) {
+          this.setState({
+            sendingRequest: false,
+            alertMessage: 'We are sorry, it seems like there was a network \
+            error, try again in a few minutes'})
+        }
+      }
+    )
   }
 
   organizeErrorResponse = (dataObj) => {
