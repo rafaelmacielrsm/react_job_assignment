@@ -29,49 +29,38 @@ export class Dashboard extends Component {
   }
 
   componentWillMount = () => {
-    this.setState({
-      user: {
-        name: "Michel Temer Lulia", gender: "M", age: '75',
-        position: {
-          latitude: "-5.1184629",
-          longitude: "-42.8044635"
+    var promiseObj = getPersonByUUID(this.props.uuid)
+    promiseObj
+        .then( response => {
+              const {name, gender, age, lonlat} = response.data;
+              var positionArray = lonlat.substring(lonlat.indexOf('(') + 1,
+                lonlat.indexOf(')')).split(' ').map(e => parseFloat(e));
+              this.setState({
+                user: {
+                  name, gender, age,
+                  position: {
+                    latitude: positionArray[1],
+                    longitude: positionArray[0]
+                  }
+                },
+                loading: false
+              });
+          }
+        )
+        .catch(error => {
+          if (error.response) {
+            this.setState({
+              loading: false,
+              alertMessage: "Not Found"
+            })
+          }else if (error.request) {
+            this.setState({
+              loading: false,
+              alertMessage: 'We are sorry, it seems like there was a network \
+              error, try again in a few minutes'})
+          }
         }
-      },
-      loading: false
-    });
-    // var promiseObj = getPersonByUUID(this.props.uuid)
-    // promiseObj
-    //     .then( response => {
-    //         console.log(response.data);
-    //           const {name, gender, age, lonlat} = response.data;
-    //           var positionArray = lonlat.substring(lonlat.indexOf('(') + 1,
-    //             lonlat.indexOf(')')).split(' ').map(e => parseFloat(e));
-    //           this.setState({
-    //             user: {
-    //               name, gender, age,
-    //               position: {
-    //                 latitude: positionArray[1],
-    //                 longitude: positionArray[0]
-    //               }
-    //             },
-    //             loading: false
-    //           });
-    //       }
-    //     )
-    //     .catch(error => {
-    //       if (error.response) {
-    //         this.setState({
-    //           loading: false,
-    //           alertMessage: "Not Found"
-    //         })
-    //       }else if (error.request) {
-    //         this.setState({
-    //           loading: false,
-    //           alertMessage: 'We are sorry, it seems like there was a network \
-    //           error, try again in a few minutes'})
-    //       }
-    //     }
-    //   )
+      )
   }
 
   handleSnackbarClosing= () => {

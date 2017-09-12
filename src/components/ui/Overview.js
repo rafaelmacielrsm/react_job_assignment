@@ -22,12 +22,14 @@ export const Overview = (props) => (
 
     </div>
     <div className="right">
-      <MapComponent
-        handleNewLocation={props.handleNewLocation}
-        lat={parseFloat(props.user.position.latitude)}
-        lng={parseFloat(props.user.position.longitude)}
-        zoom={18}
-      />
+      { props.user.position ?
+        <MapComponent
+          handleNewLocation={props.handleNewLocation}
+          lat={parseFloat(props.user.position.latitude)}
+          lng={parseFloat(props.user.position.longitude)}
+          zoom={18}
+        /> : null
+      }
     </div>
   </div>
 );
