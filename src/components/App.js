@@ -16,7 +16,7 @@ export class App extends Component {
     this.setState({user: uuid});
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     this.setState({user: localStorage.getItem("user_id") || null})
   }
 

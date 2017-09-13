@@ -30,7 +30,8 @@ export class Dashboard extends Component {
     items: {hasLoadedItems: false}
   }
 
-  componentWillMount = () => {
+  handleFirstAccess = (timeout = 2000) => {
+    console.log('handler');
     var promiseObj = getPersonByUUID(this.props.uuid)
     promiseObj
         .then( response => {
@@ -53,13 +54,12 @@ export class Dashboard extends Component {
           if (error.response) {
             this.setState({
               loading: false,
-              alertMessage: "Not Found"
+              alertMessage: "Not Found, please contact an admin"
             })
           }else if (error.request) {
-            this.setState({
-              loading: false,
-              alertMessage: 'We are sorry, it seems like there was a network \
-              error, try again in a few minutes'})
+
+            setTimeout(this.handleFirstAccess, timeout)
+
           }
         }
       )
@@ -70,7 +70,8 @@ export class Dashboard extends Component {
   }
 
   componentDidMount = () => {
-    // this.handleGetItems();
+    this.handleFirstAccess();
+    this.handleGetItems();
   }
 
   handleNewLocation = (newLocation) => {

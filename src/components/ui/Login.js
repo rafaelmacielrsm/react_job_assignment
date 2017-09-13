@@ -35,12 +35,6 @@ export class Login extends Component {
     this.setState({[field]: value});
   }
 
-  setUser = (uuid) => {
-    fetch(`http://zssn-backend-example.herokuapp.com/api/people/${uuid}`)
-      .then(response => response.json())
-      .then(user => this.setState({user}))
-  }
-
   nextStep = () => {
     const { nameFieldError, ageFieldError, gender } = this.state
     if (!(nameFieldError || ageFieldError) ) {
@@ -77,15 +71,16 @@ export class Login extends Component {
     const json =
     {
       person: { name, age, gender, lonlat },
-      items: Object.keys(items).map(k => `${k}:${items[k]}`).join(', ')
+      items: Object.keys(items).map(k => `${k}:${items[k]}`).join(';')
     }
-        
+
+
     var promiseObj = createPerson(parameterize(json));
     promiseObj
       .then(response => {
-        if (response.status == 201) {
-          () => props.handleUser(response.data.id);
-        }
+        // this.setState({sendingRequest: false, id: response.data.id});
+        const {id: uuid} = response.data
+        this.props.handleUser(uuid);
       })
       .catch(error => {
         if (error.response) {
@@ -102,8 +97,7 @@ export class Login extends Component {
             alertMessage: 'We are sorry, it seems like there was a network \
             error, try again in a few minutes'})
         }
-      }
-    )
+      })
   }
 
   organizeErrorResponse = (dataObj) => {
