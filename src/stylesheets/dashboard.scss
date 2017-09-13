@@ -5,6 +5,9 @@
 
 .menu{
   height: 5vh;
+  @media screen and (max-height: $height-sm){
+    height: 6vh;
+  }
 }
 
 .page-content{
@@ -19,10 +22,13 @@
 
 .menu-item{
   height: 5vh;
-  font-size: 1.5rem !important;
   text-transform: capitalize !important;
   overflow: hidden;
   transition: .2s ease-in-out all;
+  font-size: 1.5rem !important;
+  @media screen and (min-width: $break-lg){
+    font-size: 1.25rem !important;
+  }
   &:hover{
     overflow: visible;
     background-color: $primary-color-dark !important;
@@ -49,6 +55,12 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  overflow-y: hidden;
+  direction: rtl;
+  &:hover{
+    will-change: scroll-position;
+    overflow-y: scroll;
+  }
 }
 
 .right{
@@ -78,6 +90,7 @@
   justify-content: space-between;
   align-items: flex-start;
   box-sizing: border-box;
+  direction: ltr;
   padding: 16px;
   box-shadow: 0 0 10px rgba(0, 0, 0, .3);
 }
@@ -95,6 +108,9 @@
 
 .item-container{
   padding: 16px;
+  @media screen and (max-height: $height-sm){
+    padding: 8px;
+  }
   max-height: 25%;
   display: flex;
   justify-content: space-around;
@@ -107,7 +123,13 @@
 %icon {
   height: 5vh;
   width: 5vh;
+
   padding: 8px;
+
+  @media screen and (max-height: $height-sm){
+    height: 2.5vh;
+    width: 2.5vh;
+  }
 }
 
 #icon-water{

@@ -158,7 +158,7 @@ const ReportTable = ({total, nonInfected}) => (
         <TableRowColumn style={{fontSize: '1.25rem', textAlign: 'center'}}>
           Healthy Population</TableRowColumn>
         <TableRowColumn style={{fontSize: '1.25rem', textAlign: 'center'}}>
-          {total.toFixed(3)}
+          {nonInfected.toFixed(3)}
         </TableRowColumn>
       </TableRow>
     </TableBody>

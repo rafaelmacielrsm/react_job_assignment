@@ -15,6 +15,8 @@ $break-md: 768px;
 $break-lg: 992px;
 $break-xl: 1200px;
 
+$height-sm: 850px;
+
 :export {
   primary_color_dark: $primary-color-dark;
   primary_color: $primary-color;
@@ -87,5 +89,7 @@ input:invalid + div>hr:nth-of-type(1){
 }
 
 .personal-info{
-  transition: 0.2s all;
+  transition: 0.2s ease-in-out all;
+  h2 { text-align: center;}
+  p { text-align: center;}
 }
