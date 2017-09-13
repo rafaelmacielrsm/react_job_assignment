@@ -1,0 +1,42 @@
+.reports{
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#infected-report-container{
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55%;
+  width: 100%;
+
+  h3{
+    margin: 0;
+  }
+}
+
+#report-card {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  height: 35%;
+  width: 45%;
+}
+
+#loaded-report{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

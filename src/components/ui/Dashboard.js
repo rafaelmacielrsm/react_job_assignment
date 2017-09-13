@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, NavLink, withRouter } from 'react-router-
 import { Overview } from './Overview'
 import { Trading } from './Trading'
 import { ReportInfection } from './ReportInfection'
+import Reports from './Reports'
 
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -13,7 +14,8 @@ import Paper from 'material-ui/Paper';
 
 import PageLoading from './PageLoading'
 import AppTheme from './AppTheme'
-import { getPersonByUUID, getItems, saveNewPosition } from '../../lib/AxiosHelper'
+import { getPersonByUUID, getItems, saveNewPosition }
+  from '../../lib/AxiosHelper'
 import palette from '../../stylesheets/ui.scss'
 import parameterize from '../../lib/parameterize'
 
@@ -68,7 +70,7 @@ export class Dashboard extends Component {
   }
 
   componentDidMount = () => {
-    this.handleGetItems();
+    // this.handleGetItems();
   }
 
   handleNewLocation = (newLocation) => {
@@ -170,7 +172,7 @@ export class Dashboard extends Component {
           { this.state.loading ?
             <PageLoading color={palette.accent_color_dark}/> : null }
 
-          <NavBar name={this.state.user.name} match={this.props.match}/>
+          <NavBar match={this.props.match}/>
 
           <div className="page-content">
             <Route exact path='/' render={() =>
@@ -182,6 +184,7 @@ export class Dashboard extends Component {
             <Route exact path='/trades' component={Trading}/>
             <Route exact path='/report-infection'
               component={ReportInfection}/>
+            <Route exact path='/zssn' component={Reports}/>
           </div>
     </AppTheme>
     </div>
@@ -190,9 +193,22 @@ export class Dashboard extends Component {
 }
 
 const NavBar = (props) => {
-    const {history} = props.match;
+    const tabIndex = (pathname) => {
+      var index;
+      switch (pathname) {
+        case '/trades': index = 1; break;
+        case '/report-infection': index = 2; break;
+        case '/zssn': index = 3; break;
+        default: index = 0;
+      }
+      return index
+    };
+
+    const {history, location: {pathname}} = props.match;
+
     return(
-        <Tabs className="menu" inkBarStyle={{height: 3, marginTop: '-3px'}} >
+        <Tabs className="menu" inkBarStyle={{height: 3, marginTop: '-3px'}}
+          initialSelectedIndex={tabIndex(pathname)} >
           <Tab className="menu-item" label="Home"
             onActive={() => history.push('/') } />
           <Tab className="menu-item" label="Trade"
